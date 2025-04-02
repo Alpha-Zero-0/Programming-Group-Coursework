@@ -3,7 +3,12 @@ from tkinter import messagebox
 import time
 from task_manager import TaskManager
 from tkinter import ttk
+
+
 from calendar_tab import CalendarTab
+from Input_tab import InputDailyTab
+from progress_tab import ProgressTab
+from history_tab import HistoryTab
 
 class TaskTrackerApp:
     def __init__(self, root):
@@ -27,8 +32,24 @@ class TaskTrackerApp:
         self.tab_calendar = tk.Frame(self.notebook)
         self.notebook.add(self.tab_calendar, text="Calendar")
 
-        # Ajouter le calendrier dans l'onglet
         self.calendar_tab = CalendarTab(self.tab_calendar)
+
+        #Onglet "Input ~ Daily total"
+        self.tab_input_daily = tk.Frame(self.notebook)
+        self.notebook.add(self.tab_input_daily, text = "Input & Daily Total")
+        self.input_daily_tab = InputDailyTab(self.tab_input_daily)
+
+        #Onglet "Progress"
+        self.tab_progress = tk.Frame(self.notebook)
+        self.notebook.add(self.tab_progress, text="Progress")
+        self.progress_tab = ProgressTab(self.tab_progress)
+
+
+        #Onglet "History ~ Insight"
+        self.tab_history = tk.Frame(self.notebook)
+        self.notebook.add(self.tab_history, text="History & Insights")
+        self.history_tab = HistoryTab(self.tab_history)
+
 
         #----------- Interface pour les tâches (DANS tab_tasks) -----------
         tk.Label(self.tab_tasks, text="New Task:").pack()
@@ -127,6 +148,8 @@ class TaskTrackerApp:
     def save_and_exit(self):
         self.task_manager.save_tasks()
         self.root.destroy()
+
+
 
 if __name__ == "__main__":
     root = tk.Tk()
